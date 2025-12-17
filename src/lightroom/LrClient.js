@@ -67,13 +67,14 @@ export class LrClient {
 
       this.ws.on('open', async () => {
         console.log('WebSocket connected, registering...');
+        this.connected = true; // Set connected before registering
         try {
           const response = await this.register();
-          this.connected = true;
           this.onConnectionChange(true);
           console.log('✓ Connected to Lightroom', response);
           resolve(response);
         } catch (err) {
+          this.connected = false; // Reset on failure
           reject(err);
         }
       });
