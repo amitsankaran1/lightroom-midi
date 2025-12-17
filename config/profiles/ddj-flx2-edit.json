@@ -1,0 +1,222 @@
+{
+  "name": "DDJ-FLX2 Edit Mode",
+  "description": "Comprehensive editing controls for DDJ-FLX2 controller",
+  "mappings": [
+    {
+      "comment": "PAD 1 - Star Ratings",
+      "midi": { "type": "noteon", "channel": 0, "note": 0 },
+      "action": { "type": "rating", "rating": 1 }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 1 },
+      "action": { "type": "rating", "rating": 2 }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 2 },
+      "action": { "type": "rating", "rating": 3 }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 3 },
+      "action": { "type": "rating", "rating": 4 }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 4 },
+      "action": { "type": "rating", "rating": 5 }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 5 },
+      "action": { "type": "rating", "rating": 0 }
+    },
+    {
+      "comment": "PAD 6 - Auto Tone",
+      "midi": { "type": "noteon", "channel": 0, "note": 6 },
+      "action": { "type": "command", "command": "setAutoTone" }
+    },
+    {
+      "comment": "PAD 7 - Black & White Toggle",
+      "midi": { "type": "noteon", "channel": 0, "note": 7 },
+      "action": { "type": "command", "command": "toggleBlackAndWhite" }
+    },
+    {
+      "comment": "PAD 8 - Reset All",
+      "midi": { "type": "noteon", "channel": 0, "note": 8 },
+      "action": { "type": "command", "command": "resetAllDevelopAdjustments" }
+    },
+    {
+      "comment": "Color Labels (shifted pads)",
+      "midi": { "type": "noteon", "channel": 0, "note": 16 },
+      "action": { "type": "colorLabel", "color": "red" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 17 },
+      "action": { "type": "colorLabel", "color": "yellow" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 18 },
+      "action": { "type": "colorLabel", "color": "green" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 19 },
+      "action": { "type": "colorLabel", "color": "blue" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 20 },
+      "action": { "type": "colorLabel", "color": "purple" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 21 },
+      "action": { "type": "colorLabel", "color": "none" }
+    },
+    {
+      "comment": "CC 1 - Exposure (typical knob/fader)",
+      "midi": { "type": "cc", "channel": 0, "controller": 1 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Exposure2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -5,
+          "lrMax": 5
+        }
+      }
+    },
+    {
+      "comment": "CC 2 - Contrast",
+      "midi": { "type": "cc", "channel": 0, "controller": 2 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Contrast2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 3 - Highlights",
+      "midi": { "type": "cc", "channel": 0, "controller": 3 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Highlights2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 4 - Shadows",
+      "midi": { "type": "cc", "channel": 0, "controller": 4 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Shadows2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 5 - Whites",
+      "midi": { "type": "cc", "channel": 0, "controller": 5 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Whites2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 6 - Blacks",
+      "midi": { "type": "cc", "channel": 0, "controller": 6 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Blacks2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 7 - Vibrance",
+      "midi": { "type": "cc", "channel": 0, "controller": 7 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Vibrance",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 8 - Saturation",
+      "midi": { "type": "cc", "channel": 0, "controller": 8 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Saturation",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "CC 9 - Temperature",
+      "midi": { "type": "cc", "channel": 0, "controller": 9 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Temperature",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": 2000,
+          "lrMax": 50000
+        }
+      }
+    },
+    {
+      "comment": "CC 10 - Tint",
+      "midi": { "type": "cc", "channel": 0, "controller": 10 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Tint",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -150,
+          "lrMax": 150
+        }
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,65 @@
+{
+  "name": "DDJ-FLX2 Navigation Mode",
+  "description": "Photo browsing and selection controls",
+  "mappings": [
+    {
+      "comment": "PAD 1 - Previous Photo",
+      "midi": { "type": "noteon", "channel": 0, "note": 0 },
+      "action": { "type": "command", "command": "previousPhoto" }
+    },
+    {
+      "comment": "PAD 2 - Next Photo",
+      "midi": { "type": "noteon", "channel": 0, "note": 1 },
+      "action": { "type": "command", "command": "nextPhoto" }
+    },
+    {
+      "comment": "PAD 3 - Toggle Zoom",
+      "midi": { "type": "noteon", "channel": 0, "note": 2 },
+      "action": { "type": "command", "command": "toggleZoom" }
+    },
+    {
+      "comment": "PAD 4 - Zoom to Fit",
+      "midi": { "type": "noteon", "channel": 0, "note": 3 },
+      "action": { "type": "command", "command": "zoomToFit" }
+    },
+    {
+      "comment": "PAD 5 - Zoom to Fill",
+      "midi": { "type": "noteon", "channel": 0, "note": 4 },
+      "action": { "type": "command", "command": "zoomToFill" }
+    },
+    {
+      "comment": "PAD 6 - Zoom 100%",
+      "midi": { "type": "noteon", "channel": 0, "note": 5 },
+      "action": { "type": "command", "command": "zoomToOneToOne" }
+    },
+    {
+      "comment": "PAD 7 - Grid View",
+      "midi": { "type": "noteon", "channel": 0, "note": 6 },
+      "action": { "type": "command", "command": "showView", "params": ["square_grid"] }
+    },
+    {
+      "comment": "PAD 8 - Loupe View",
+      "midi": { "type": "noteon", "channel": 0, "note": 7 },
+      "action": { "type": "command", "command": "showView", "params": ["loupe"] }
+    },
+    {
+      "comment": "Flags",
+      "midi": { "type": "noteon", "channel": 0, "note": 8 },
+      "action": { "type": "flag", "flag": "pick" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 9 },
+      "action": { "type": "flag", "flag": "reject" }
+    },
+    {
+      "midi": { "type": "noteon", "channel": 0, "note": 10 },
+      "action": { "type": "flag", "flag": "unflag" }
+    },
+    {
+      "comment": "Switch to Edit Profile",
+      "midi": { "type": "noteon", "channel": 0, "note": 15 },
+      "action": { "type": "switchProfile", "profile": "ddj-flx2-edit" }
+    }
+  ]
+}
+
