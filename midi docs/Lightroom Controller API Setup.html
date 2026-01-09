@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)file:///private/var/folders/qy/fx5bbw4x3wx69bzthrg_mddm0000gn/T/LrControllerAPI_9.1_Setup.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Lightroom Controller API Setup</title>
+		<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsSAAALEgHS3X78AAABE0lEQVRYhWP8//8/w0ACpgG1nYGBgQVdgFHe3ICBgaGBgYHBn8p2bQSZ+//hyQso9iFHAaO8eQIDA8N8KluMDhL/Pzy5AMMBUJ+fp7HlMGAICwnkNNBAJ8tR7EJ2ALXjHB+A2zX4cgE2YNh1Ei56vsycqg4Y8BAYGlFALFDNmA5W+erwCjAtoGPP8Pf7F4Ynm/ro4wAeJSMwzSmlxsDMwQNmf7l3Dq8emkQBzHJiAFVDABlcqndh+Pv9M0F1NEuExFhOUwcQC4ZeNkQuFWGAktJxNAqQGyR0bZ3+f3iSEUSPRsGgcsBGOtoLt2vwNEqhzeREOlieiNw5QUkD0A6DIY2iYyO0P7AAWXC0czqwDmBgYAAAXclRHVQ0zgoAAAAASUVORK5CYII=">
+		<style>
+
+			body {
+				background-color: #efefef;
+				color: #1a1a1a;	/* dark gray */
+				font-family: verdana;
+				text-align: center;
+				margin-left: 5em;
+				margin-right: 10%;
+				line-height: 180%;
+			}
+
+			code {
+				font-family: Consolas, "Lucida Console", Courier, monospace;
+				color: black;
+				line-height: 100%;
+			}
+
+			code.inline {
+				font-family: Consolas, "Lucida Console", Courier, monospace;
+
+				color: #black;				/* blue */
+				background-color: #cfcfcf;	/* light gray */
+
+				padding-top: 0.2em;
+				padding-bottom: 0.2em;
+				padding-left: 0.5em;
+				padding-right: 0.5em;
+
+				border-radius: 0.1em;
+			}
+			
+			pre {
+				tab-size: 4;
+				border: 1px solid #999999;
+				background-color: #cfcfcf;
+				padding: 1.0em;
+				width: max-content;
+			}
+
+			.content {
+				display: inline-block;
+				text-align: left;
+				max-width: 800px;
+			}
+			
+			hr {
+				height: 1px;
+				color: #666699;				/* dark gray-blue */
+				background: #666699;		/* dark gray-blue */
+				font-size: 0;
+				border: 0;
+			}
+			
+			h1 {
+				margin-top: 0.9em;
+				margin-bottom: 0;
+				font-weight: 500;
+				line-height: 1.1;
+			}
+
+			h3 {
+				color: #666699;				/* dark gray-blue */
+				font-weight: 600;
+				margin-top: 2em;
+			}
+			
+			h5 {
+				color: #999;				/* mid gray */
+				font-weight: 500;
+				font-style: italic;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="content">
+
+			<h1>Lightroom Controller API Setup</h1>		
+
+			<br>
+			<hr>
+			<br>
+
+			Communication between 3rd party controller apps and Lightroom happens over a
+			WebSocket connection.
+
+			<h3>Getting started</h3>
+
+			You will first need to enable the feature. To do this, navigate to the Interface tab in the
+			Preferences and make sure the “Enable external controllers” checkbox is ticked. Restart
+			Lightroom.
+
+			<h3>Lightroom WebSocket Server</h3>
+
+			When the feature is enabled, Lightroom will start a WebSocket server at <code class="inline">ws://127.0.0.1:7682</code> by
+			default. When a client connects, Lightroom will show a dialog confirming if the user recognizes
+			this application, with the option to remember it across launches.
+
+			<br>
+			<br>
+
+			If the port is not available, Lightroom falls back to a different port. The port that Lightroom
+			listens on will be saved into the file <code class="inline">connections.json</code> file at this location:
+
+			<ul>
+				<li>Mac: <code class="inline">~/Library/Application Support/Adobe/Lightroom CC/Connections</code></li>
+				<li>Win: <code class="inline">AppData\Local\Adobe\Lightroom CC\Connections</code></li>
+			</ul>
+
+			<h3>Prototype for Communication</h3>
+
+			The client can make requests to Lightroom via messages. Here is the protocol for a message:
+
+			<code><pre>{
+	"requestId": "&lt;guid&gt;",
+	"object": "&lt;object handle&gt;",
+	"message": "&lt;operation&gt;",
+	"params": [
+	&lt;param1&gt;,
+	...
+	]
+}
+</pre></code>
+
+			The requestId is a new guid string for every request. Response messages that are sent back
+			from the Lightroom server will refer this guid. The object handle is the handle to the object that the
+			client wants to send the message to. By default, messages are sent to the root object for
+			which this parameter can be omitted.
+
+			<br>
+			<br>
+
+			Here is the protocol for the response message:
+
+			<code><pre>{
+	"requestId": "&lt;request guid&gt;",
+	"success": &lt;boolean&gt;,
+	"response": {
+		&lt;return_value_1&gt;,
+		...
+	}
+}
+</pre></code>
+
+			Each request can be served by one or many responses.
+
+			<h3>Initializing the connection</h3>
+
+			First call from the plugin should be:
+
+			<code><pre>{
+	"requestId": "&lt;guid&gt;",
+	"object": null,
+	"message": "register",
+	"params": [
+		"&lt;appName&gt;",
+		"&lt;appVersion&gt;",
+		"&lt;optional_clientGUID&gt;"
+	]
+}
+</pre></code>
+
+			Lightroom should reply with:
+
+			<code><pre>{
+	"requestId": "&lt;request guid&gt;",
+	"success": true,
+	"response": {
+		&lt;clientGUID&gt;,
+		&lt;Lightroom version&gt;
+	}
+}
+</pre></code>
+
+			When the client initiates the registration process, Lightroom will show a dialog to the user
+			to confirm whether they want to allow it. If allowed, Lightroom will return a GUID to the
+			client. On subsequent connections, if the same GUID is passed back into the <code class="inline">register</code> call,
+			then the confirmation dialog will not be shown.
+
+			<h3>Closing</h3>
+
+			After the 3rd party app is done using any object, it can close it by calling the following:
+
+			<code><pre>{
+	"requestId": "&lt;guid&gt;",
+	"object": "&lt;object handle&gt;",
+	"message": "close",
+	"params": []
+}
+</pre></code>
+
+
+			<br>
+			<br>
+
+			<hr>
+
+		</div>
+	
+			
+</body></html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)file:///private/var/folders/qy/fx5bbw4x3wx69bzthrg_mddm0000gn/T/LrControllerAPI_9.1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Lightroom Controller API</title>
+		<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsSAAALEgHS3X78AAABE0lEQVRYhWP8//8/w0ACpgG1nYGBgQVdgFHe3ICBgaGBgYHBn8p2bQSZ+//hyQso9iFHAaO8eQIDA8N8KluMDhL/Pzy5AMMBUJ+fp7HlMGAICwnkNNBAJ8tR7EJ2ALXjHB+A2zX4cgE2YNh1Ei56vsycqg4Y8BAYGlFALFDNmA5W+erwCjAtoGPP8Pf7F4Ynm/ro4wAeJSMwzSmlxsDMwQNmf7l3Dq8emkQBzHJiAFVDABlcqndh+Pv9M0F1NEuExFhOUwcQC4ZeNkQuFWGAktJxNAqQGyR0bZ3+f3iSEUSPRsGgcsBGOtoLt2vwNEqhzeREOlieiNw5QUkD0A6DIY2iYyO0P7AAWXC0czqwDmBgYAAAXclRHVQ0zgoAAAAASUVORK5CYII=">
+		<style>
+
+	body {
+		color: #cccccc;
+		background-color: #1a1a1a;	/* dark gray */
+		font-family: verdana;
+		text-align: center;
+	}
+
+	code {
+		font-family: Consolas, "Lucida Console", Courier, monospace;
+
+		color: #6699ff;				/* blue */
+		background-color: #262626;	/* gray */
+
+		padding-top: 0.25em;
+		padding-bottom: 0.25em;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+
+		border-radius: 0.1em;
+	}
+	
+	a {
+		color = #F53C3C;			/* red */
+	}
+
+	a:link {
+	  background-color: #1473E6;	/* blue */
+	  color: white;
+	  padding: 7px 12px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	}
+	
+	a:visited {
+	  background-color: #0c458a;	/* dark blue */
+	  color: #d1dceb;				/* light blue */
+	  padding: 7px 12px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	}
+	
+	a:hover, a:active {
+	  background-color: blue;
+	}
+
+	.string {
+		color: #F53C3C;				/* red */
+		background-color: #332222;	/* dark red */
+		padding-left: 2px;
+		padding-right: 2px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		border-radius: 3px;
+	}
+
+	.type {
+		color: #45BE60; 			/* green */
+		/*color: #A045AD;*/ 		/* purple */
+		/*color: #FFA500;*/ 		/* orange*/
+
+		font-style: italic;
+
+		padding-left: 2px;
+		padding-right: 2px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+	.field {
+		padding-left: 2px;
+		padding-right: 2px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+	
+	.content {
+	  display: inline-block;
+	  text-align: left;
+	}
+	
+	hr {
+		height: 1px;
+		color: #6699ff;				/* blue */
+		background: #6699ff;		/* blue */
+		font-size: 0;
+		border: 0;
+	}
+	
+	h1 {
+		margin-top: 0.9em;
+		margin-bottom: 0;
+		font-weight: 500;
+		line-height: 1.1;
+	}
+	
+	h5 {
+		color: #999;				/* mid gray */
+		font-weight: 500;
+		font-style: italic;
+	}
+		</style>
+	</head>
+	<body>
+		<div class="content">
+<h1>Lightroom Controller API</h1><h5>Version 9.1</h5><a href="file:///private/var/folders/qy/fx5bbw4x3wx69bzthrg_mddm0000gn/T/LrControllerAPI_9.1_Setup.html">Initial Setup Instructions</a><br><br>			<hr>
+<br>
+<code>appVersionString()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the current version of the application as a user-displayable string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(for instance, <code class="string">"8.0"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns <code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp; Lightroom version<br>
+<br>
+<code>appVersionTable()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the current version of the application as a table that can be parsed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For example, a version such as 8.1.4 contains three components, the major version,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the minor version, and the revision number of a specific release. There is also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be a build number (usually a 6-digit number).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns <code class="type">(table)</code> Lightroom version. Contains the following members:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <code class="field">major</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code> Major version number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <code class="field">minor</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code> Minor version number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <code class="field">revision</code>&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code> Revision number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• <code class="field">build</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code> Build number (usually a six-digit number)<br>
+<br>
+<code>showView()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Switches the app's view mode to one of: <code class="string">"loupe"</code>, <code class="string">"square_grid"</code>, <code class="string">"compare"</code>, <code class="string">"dynamic_grid"</code><br>
+<br>
+<code>showSource()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selects the given source, one of: <code class="string">"all_photos"</code>, <code class="string">"trash"</code><br>
+<br>
+<code>goBack()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Navigates back to the previous view mode or photo source<br>
+<br>
+<code>goForward()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Navigates forward to the next view mode or photo source<br>
+<br>
+<code>selectAll()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selects all photos in the grid.<br>
+<br>
+<code>selectNone()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deselects all photos.<br>
+<br>
+<code>nextPhoto()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selects the next photo.<br>
+<br>
+<code>previousPhoto()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selects the previous photo.<br>
+<br>
+<code>zoomIn()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zooms in to the last level used.<br>
+<br>
+<code>zoomOut()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zooms out to the last level used.<br>
+<br>
+<code>zoomToOneToOne()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zooms to 100%.<br>
+<br>
+<code>zoomToFit()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets zoom mode to Fit, making the photo as large as possible while keeping all of it visible.<br>
+<br>
+<code>zoomToFill()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets zoom mode to Fill, making the photo completely fill the view.<br>
+<br>
+<code>zoomInSome()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increases the zoom factor one step.<br>
+<br>
+<code>zoomOutSome()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreases the zoom factor one step.<br>
+<br>
+<code>toggleZoom()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles between zoomed in and zoomed out.<br>
+<br>
+<code>setFocusPoint()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pans the photo to the given focus point.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;New x coordinate as a percentage of the photo width [0-1].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If nil, the x position is unchanged.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;New y coordinate as a percentage of the photo height [0-1].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If nil, the y position is unchanged.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animate&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(boolean)</code>&nbsp;&nbsp;&nbsp;&nbsp;If true, smoothly animates to the new location.<br>
+<br>
+<code>revealPanel()</code><br>
+<br>
+<code>revealAdjustedControls()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enables a mode where adjusting a parameter causes that panel to be automatically revealed in the panel track.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(bool)</code>&nbsp;&nbsp;&nbsp;&nbsp;true to enable reveal behavior, false to disable it (the default mode)<br>
+<br>
+<code>openImage()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens an image for editing in the Local tab.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Path to a file to open.<br>
+<br>
+<code>renderImage()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a JPEG rendering of the active image with its current Edit settings applied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Optional format to return, one of: <code class="string">"base64"</code>, <code class="string">"filepath"</code> (returns<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the path to a temp file)<br>
+<br>
+<code>renderImagesInAlbum()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders all images in an album to temp files. If no album ID is given, uses the currently-selected album. Returns the path the folder where the files will be saved.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;Optional. If omitted, the currently-selected album is used.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp; Optional. Desired minimum length of long edge of previews. Defaults to 2048.<br>
+<br>
+<code>setAutoTone()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applies Auto Tone to the current photo.<br>
+<br>
+<code>toggleHDR()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles HDR on/off for the current photo.<br>
+<br>
+<code>isHDROn()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if HDR on for the current photo.<br>
+<br>
+<code>toggleBlackAndWhite()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles B&amp;W conversion on/off for the current photo.<br>
+<br>
+<code>isBlackAndWhiteOn()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if B&amp;W conversion is on for the current photo.<br>
+<br>
+<code>setImageSettingsXMP()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the edit settings of the current photo from the given XMP.<br>
+<br>
+<code>resetToOpen()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reverts all changes made during this edit session.<br>
+<br>
+<code>resetToDefault()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets a single adjustment for the current photo to its default value.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument: <code class="type">(string)</code> a parameter name<br>
+<br>
+<code>resetAllDevelopAdjustments()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets all adjustments for the current photo.<br>
+<br>
+<code>resetCrop()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets the crop angle and frame for the current photo.<br>
+<br>
+<code>resetSpotRemoval()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears all heal/remove adjustments from the current photo.<br>
+<br>
+<code>resetRedeye()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears all redeye removal adjustments from the current photo.<br>
+<br>
+<code>getParameterNames()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an ordered list of all parameter names.<br>
+<br>
+<code>getParameterType()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a parameter's type, one of: <code class="string">"boolean"</code>, <code class="string">"number"</code>, <code class="string">"string"</code>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+<br>
+<code>getPanelNames()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an ordered list of all panel names.<br>
+<br>
+<code>getRange()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the min and max value, precision, and increment sizes of a numeric adjustment. If precision is zero,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value is an integer.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note: the values of the following parameters have special meanings:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"PerspectiveUpright"</code> :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 = Off<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 = Auto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 = Full<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 = Level<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 = Vertical<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5 = Guided<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"HDREditMode"</code> :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 = Off<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 = On<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns:&nbsp;&nbsp;&nbsp;&nbsp; (number, number, number, number, number) The min, max, precision, small increment, and large increment for the given parameter.<br>
+<br>
+<code>getDefault()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the default value for a parameter.<br>
+<br>
+<code>getLabel()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the localized user-visible string describing a parameter.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns:&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Label for the parameter.<br>
+<br>
+<code>setValue()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of an adjustment for the current photo.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp; The new value for the parameter.<br>
+<br>
+<code>getValue()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the current value of an adjustment for the current photo.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+<br>
+<code>increment()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increments the value of an adjustment for the current photo.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;Optional amount by which to increment. If omitted, a default amount will be used.<br>
+<br>
+<code>decrement()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decrements the value of an adjustment for the current photo.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameter&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;Name of a parameter (ex: <code class="string">"Exposure2012"</code>).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;Optional amount by which to decrement. If omitted, a default amount will be used.<br>
+<br>
+<code>startTracking()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Temporarily puts the Develop module into its tracking state, causing faster, lower-quality redraw<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and preventing history states from being generated. Tracking will automatically be turned back<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;off as soon as a diferent parameter is adjusted, or two seconds after the last adjustment is made.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;a parameter name<br>
+<br>
+<code>stopTracking()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Causes Develop module to exit its tracking state immediately, creating a single history state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for all changes that were made to the parameter that was being tracked.<br>
+<br>
+<code>setTrackingDelay()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the number of seconds that tracking remains enabled after each adjustment is made.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The default is 2 seconds.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp; number of seconds to wait before turning off tracking<br>
+<br>
+<code>setTrackingModifiers()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets/clears modifier keys that may affect the behavior of the tracking parameter (for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example, to enable the slider visualization shown when the Alt/Option key is held down).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code>&nbsp;&nbsp;&nbsp;&nbsp;If <code class="string">"option"</code> then that modifier key is enabled. If not, all tracking modifiers are cleared.<br>
+<br>
+<code>setMultipleAdjustmentThreshold()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the time threshold that determines when adjustments to different parameters will be grouped<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;together into a single history state versus recorded separately. If multiple different parameters <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are changed within a window of time that is less than this threshold, they will be grouped <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;together into a single <code class="string">"Multiple Settings"</code> history state. If they occur farther apart than this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threshold, each will get its own history state. Recording many separate history states in rapid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;succession can degrade Lightroom's performance, so this threshold is very important if simultaneous <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adjustments by the user are a possibility.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The default is 0.5 seconds. Has no effect if set to a value that is higher than the tracking delay.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code class="type">(number)</code>&nbsp;&nbsp;&nbsp;&nbsp;time threshold under which multiple adjustments will be grouped together<br>
+<br>
+<code>addAdjustmentChangeObserver( optParam )</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers an observer that will be called any time the develop adjustments changes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument: <code class="type">(string)</code> A parameter name to observe. If this is omitted, all parameters are observed.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns: <code class="type">(string)</code> The GUID of an object that can be closed when you do not need the observer any more.<br>
+<br>
+<code>rotateLeft()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rotates the image 90 degrees counter-clockwise.<br>
+<br>
+<code>rotateRight()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rotates the image 90 degrees clockwise.<br>
+<br>
+<code>flipVertical()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flips the image vertically.<br>
+<br>
+<code>flipHorizontal()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mirrors the image horizontally.<br>
+<br>
+<code>rotateAspectRatio()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rotates the aspect ratio between portrait and landscape.<br>
+<br>
+<code>toggleConstrainAspectRatio()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles aspect ratio constraint on/off.<br>
+<br>
+<code>isConstrainAspectRatioOn()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if constrain aspect ratio is on.<br>
+<br>
+<code>setCropAspectRatio()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the crop aspect ratio.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;(number or string) <code class="string">"original"</code>, <code class="string">"as_shot"</code>, <code class="string">"custom"</code>, or a number greater than 0 <code class="type">(width/height)</code>.<br>
+<br>
+<code>getCropAspectRatio()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the aspect ratio of crop used when constraint is enabled.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns: (number, string) the crop aspect ratio, and <code class="string">"original"</code> or <code class="string">"as_shot"</code> or <code class="string">"custom"</code>.<br>
+<br>
+<code>getPresetIDs()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an ordered list of all preset IDs.<br>
+<br>
+<code>getPresetName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the preset with the given ID.<br>
+<br>
+<code>applyPreset()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applies the preset with the given ID to the selected photos.<br>
+<br>
+<code>getProfileIDs()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an ordered list of all profile IDs.<br>
+<br>
+<code>getProfileName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name of the profile with the given ID.<br>
+<br>
+<code>applyProfile()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applies the profile with the given ID to the current photo.<br>
+<br>
+<code>selectTool()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activate a tool mode.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Argument:&nbsp;&nbsp;&nbsp;&nbsp;<code class="type">(string)</code> new tool mode, one of: <code class="string">"loupe"</code>, <code class="string">"crop"</code>, <code class="string">"heal"</code>, <code class="string">"whiteBalance"</code>, <code class="string">"masking"</code>, <code class="string">"upright"</code>.<br>
+<br>
+<code>getSelectedTool()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reports which tool mode is active.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns: <code class="type">(string)</code> current tool mode, one of: <code class="string">"loupe"</code>, <code class="string">"crop"</code>, <code class="string">"heal"</code>, <code class="string">"whiteBalance"</code>, <code class="string">"masking"</code>, <code class="string">"upright"</code>.<br>
+<br>
+<code>showClipping()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles clipping indicators on/off.<br>
+<br>
+<code>isClippingShowing()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if clipping indicators are enabled.<br>
+<br>
+<code>editInPhotoshop()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the current photo for editing in Photoshop.<br>
+<br>
+<code>openExport()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Export dialog for the selected photos.<br>
+<br>
+<code>canExportWithPrevious()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the selected photos can be exported using the last export settings.<br>
+<br>
+<code>exportWithPrevious()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exports the selected photos using the last export settings.<br>
+<br>
+<code>openEnhance()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Enhance dialog for the selected photo.<br>
+<br>
+<code>openHDRMerge()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the HDR Merge dialog for the selected photos.<br>
+<br>
+<code>openPanoramaMerge()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the Panorama Merge dialog for the selected photos.<br>
+<br>
+<code>openHDRPanoramaMerge()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the HDR Panorama dialog for the selected photos.<br>
+<br>
+<code>clearSearch()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears the search criteria.<br>
+<br>
+<code>clearFilters()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears the search filters.<br>
+<br>
+<code>showFilters()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shows/hides the search filters.<br>
+<br>
+<code>setRatingFilter()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating filter, [0-5].<br>
+<br>
+<code>setPickFilter()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the pick filter, one of: <code class="string">"flagged"</code>, <code class="string">"rejected"</code>, <code class="string">"unflagged"</code>, <code class="string">"unrejected"</code>, <code class="string">"nonneutral"</code>, <code class="string">"nonflagged"</code>.<br>
+<br>
+<code>openPreferences()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the preferences dialog.<br>
+<br>
+<code>copyEditSettings()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies Edit settings to the clipboard.<br>
+<br>
+<code>showCopyEditSettings()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shows the dialog for choosing which Edit settings to copy.<br>
+<br>
+<code>canPasteEditSettings()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if there are Edit settings on the clipboard.<br>
+<br>
+<code>pasteEditSettings()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pastes Edit settings from the clipboard.<br>
+<br>
+<code>undo()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Undoes the last operation.<br>
+<br>
+<code>redo()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redoes the last undone operation.<br>
+<br>
+<code>duplicatePhoto()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a copy of the selected photos.<br>
+<br>
+<code>createAlbumWithName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new album with the given name. If an album with name already exists a number will be appended onto the name to make it unique.<br>
+<br>
+<code>selectAlbumWithName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selects the album with the given name.<br>
+<br>
+<code>addImagesToAlbumWithName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the selected images to the album with the given name.<br>
+<br>
+<code>shareAlbumWithName()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shares the album with the given name.<br>
+<br>
+<code>viewSharedAlbumOnWeb()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opens the shared album with the given name in the browser.<br>
+<br>
+<code>flagPick()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the flag to 'picked'<br>
+<br>
+<code>flagReject()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the flag to 'rejected'<br>
+<br>
+<code>flagUnflag()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the flag to 'unflagged'<br>
+<br>
+<code>flagIncrease()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increases the flag ('unflagged' to 'picked' or 'rejected' to 'unflagged')<br>
+<br>
+<code>flagDecrease()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreases the flag ('picked' to 'unflagged' or 'unflagged' to 'rejected')<br>
+<br>
+<code>flagPickToggle()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles the flag between 'picked' and 'unflagged'<br>
+<br>
+<code>flagRejectToggle()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Toggles the flag between 'rejected' and 'unflagged'<br>
+<br>
+<code>getFlag()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the flag state, one of: 'picked', 'unflagged', or 'rejected')<br>
+<br>
+<code>rating0()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 0<br>
+<br>
+<code>rating1()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 1<br>
+<br>
+<code>rating2()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 2<br>
+<br>
+<code>rating3()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 3<br>
+<br>
+<code>rating4()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 4<br>
+<br>
+<code>rating5()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the rating to 5<br>
+<br>
+<code>ratingIncrease()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increases the rating<br>
+<br>
+<code>ratingDecrease()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreases the rating<br>
+<br>
+<code>getRating()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the rating, [0-5]<br>
+<br>
+<code>colorLabelRed()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the color label to red<br>
+<br>
+<code>colorLabelYellow()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the color label to yellow<br>
+<br>
+<code>colorLabelGreen()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the color label to green<br>
+<br>
+<code>colorLabelBlue()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the color label to blue<br>
+<br>
+<code>colorLabelPurple()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the color label to purple<br>
+<br>
+<code>colorLabelNone()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes the color label<br>
+<br>
+<code>getColorLabel()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the current color label, one of: 'red', 'yellow', 'green', 'blue', 'purple', or 'none'<br>
+<br>
+<code>addHapticsObserver()</code><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registers an observer that will be notified about haptic events. Each notification <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will contain the following fields:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One of the following:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"slider"</code>&nbsp;&nbsp;&nbsp;&nbsp;a slider handle is being dragged<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"crop"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a crop handle is being dragged<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"dialog"</code>&nbsp;&nbsp;&nbsp;&nbsp;a dialog has opened/closed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"warning"</code>&nbsp;&nbsp;&nbsp;&nbsp;a warning has been shown<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"menu"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a popup menu is being used<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"activity"</code>&nbsp;&nbsp;&nbsp;&nbsp;a background activity is/was running<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"dialog"</code> then event will be <code class="string">"opened"</code> or <code class="string">"closed"</code>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"slider"</code> or <code class="string">"crop"</code> then event will be one of the following:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"hit"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent once when the drag first reaches a side.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"repeat"</code>&nbsp;&nbsp;&nbsp;&nbsp;sent repeatedly if dragging continues past the end.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"snap"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent when the drag snaps in/out of constrained mode.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"menu"</code> then event will be <code class="string">"selected"</code>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"activity"</code> then event will be <code class="string">"done"</code>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;side&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"slider"</code> then side will be one of the following:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"min"</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent when the left side of the slider track is hit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"default"</code>&nbsp;&nbsp;&nbsp;&nbsp;sent when the slider crosses over its default value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"max"</code>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sent when the right side of the slider track is hit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If category is <code class="string">"crop"</code> then side will be one of the following:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"left"</code>, <code class="string">"top"</code>, <code class="string">"right"</code>, <code class="string">"bottom"</code>, <code class="string">"top-left"</code>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="string">"top-right"</code>, <code class="string">"bottom-left"</code>, <code class="string">"bottom-right"</code>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The id of the slider/dialog.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns: An observer object on which you can call <code class="string">"close"</code> when you don't need the observer anymore.<br>
+			<br>
+			<hr>
+			<br>
+		</div>
+	
+
+</body></html>
