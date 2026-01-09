@@ -1,0 +1,162 @@
+{
+  "name": "DDJ-FLX2 Color Grading",
+  "description": "HSL and color grading controls",
+  "mappings": [
+    {
+      "comment": "HSL - Red Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 1 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentRed",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Orange Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 2 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentOrange",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Yellow Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 3 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentYellow",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Green Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 4 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentGreen",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Aqua Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 5 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentAqua",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Blue Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 6 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentBlue",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Purple Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 7 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentPurple",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "HSL - Magenta Hue",
+      "midi": { "type": "cc", "channel": 0, "controller": 8 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "HueAdjustmentMagenta",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "Clarity",
+      "midi": { "type": "cc", "channel": 0, "controller": 9 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Clarity2012",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "Dehaze",
+      "midi": { "type": "cc", "channel": 0, "controller": 10 },
+      "action": { 
+        "type": "setValue", 
+        "parameter": "Dehaze",
+        "tracking": true,
+        "scale": {
+          "midiMin": 0,
+          "midiMax": 127,
+          "lrMin": -100,
+          "lrMax": 100
+        }
+      }
+    },
+    {
+      "comment": "Switch back to Edit Profile",
+      "midi": { "type": "noteon", "channel": 0, "note": 15 },
+      "action": { "type": "switchProfile", "profile": "ddj-flx2-edit" }
+    }
+  ]
+}
+
