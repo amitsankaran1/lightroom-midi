@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
  * Lightroom WebSocket Client
  * Handles connection and communication with Lightroom's Controller API
  */
-export class LrClient {
+class LrClient {
   constructor(options = {}) {
     this.host = options.host || '127.0.0.1';
     this.port = options.port || 7682;
@@ -312,3 +312,4 @@ export class LrClient {
   }
 }
 
+export default LrClient;

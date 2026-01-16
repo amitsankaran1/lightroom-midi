@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
  * Profile Manager
  * Handles loading, switching, and executing profile mappings
  */
-export class ProfileManager {
+class ProfileManager {
   constructor(lrClient) {
     this.lrClient = lrClient;
     this.profiles = new Map();
@@ -263,4 +263,6 @@ export class ProfileManager {
     }
   }
 }
+
+export default ProfileManager;
 

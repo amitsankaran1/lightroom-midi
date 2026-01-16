@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightroom MIDI Controller - DDJ-FLX2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header with Connection Status -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Lightroom MIDI Controller</h1>
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <span class="status-label">MIDI:</span>
+                        <span class="status-dot" id="midi-status"></span>
+                        <span id="midi-device-name">Not Connected</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Lightroom:</span>
+                        <span class="status-dot" id="lr-status"></span>
+                        <span id="lr-status-text">Not Connected</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="profile-selector">
+                    <label for="profile-select">Profile:</label>
+                    <select id="profile-select">
+                        <option value="">Select Profile...</option>
+                    </select>
+                </div>
+                <div class="device-selector">
+                    <label for="device-select">MIDI Device:</label>
+                    <select id="device-select">
+                        <option value="">Select Device...</option>
+                    </select>
+                    <button id="connect-btn">Connect</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Controller Layout -->
+        <main class="controller-container">
+            <!-- DDJ-FLX2 Controller Layout -->
+            <div class="ddj-flx2-layout">
+
+                <!-- Left Side Controls -->
+                <div class="side-controls left-side">
+                    <div class="control-group">
+                        <div class="headphone-controls">
+                            <div class="knob-label">HEADPHONE CUE</div>
+                            <div class="dual-knob">
+                                <div class="knob" data-control="headphone-master">
+                                    <div class="knob-label-small">MASTER</div>
+                                </div>
+                                <div class="knob" data-control="headphone-ch">
+                                    <div class="knob-label-small">CH</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deck 1 (Left) -->
+                <div class="deck deck-left">
+                    <div class="deck-header">
+                        <span class="deck-number">1</span>
+                    </div>
+
+                    <!-- Jog Wheel -->
+                    <div class="jog-wheel">
+                        <div class="jog-wheel-inner"></div>
+                        <div class="jog-wheel-platter"></div>
+                    </div>
+
+                    <!-- Deck Controls -->
+                    <div class="deck-controls">
+                        <button class="deck-btn" data-deck="1" data-control="play">
+                            <span>▶</span>
+                            <span class="btn-label">PLAY/PAUSE</span>
+                        </button>
+                        <button class="deck-btn" data-deck="1" data-control="cue">
+                            <span>CUE</span>
+                        </button>
+                        <button class="deck-btn" data-deck="1" data-control="sync">
+                            <span>SYNC</span>
+                        </button>
+                    </div>
+
+                    <!-- Performance Pads -->
+                    <div class="performance-pads">
+                        <div class="pads-row">
+                            <div class="pad" data-deck="1" data-pad="1" data-note="0">
+                                <span class="pad-number">1</span>
+                                <span class="pad-label">★</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="2" data-note="1">
+                                <span class="pad-number">2</span>
+                                <span class="pad-label">★★</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="3" data-note="2">
+                                <span class="pad-number">3</span>
+                                <span class="pad-label">★★★</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="4" data-note="3">
+                                <span class="pad-number">4</span>
+                                <span class="pad-label">★★★★</span>
+                            </div>
+                        </div>
+                        <div class="pads-row">
+                            <div class="pad" data-deck="1" data-pad="5" data-note="4">
+                                <span class="pad-number">5</span>
+                                <span class="pad-label">★★★★★</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="6" data-note="5">
+                                <span class="pad-number">6</span>
+                                <span class="pad-label">No Rating</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="7" data-note="6">
+                                <span class="pad-number">7</span>
+                                <span class="pad-label">Auto Tone</span>
+                            </div>
+                            <div class="pad" data-deck="1" data-pad="8" data-note="7">
+                                <span class="pad-number">8</span>
+                                <span class="pad-label">B&W</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tempo Slider -->
+                    <div class="tempo-section">
+                        <div class="tempo-slider" data-deck="1">
+                            <div class="slider-track"></div>
+                            <div class="slider-thumb"></div>
+                        </div>
+                        <div class="tempo-label">TEMPO</div>
+                    </div>
+                </div>
+
+                <!-- Center Mixer Section -->
+                <div class="mixer-section">
+                    <!-- EQ & Effects -->
+                    <div class="mixer-column mixer-left">
+                        <div class="eq-section">
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-hi-1">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">HI</div>
+                                <div class="knob-value" data-param="eq-hi-1">0</div>
+                            </div>
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-mid-1">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">MID</div>
+                                <div class="knob-value" data-param="eq-mid-1">0</div>
+                            </div>
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-low-1">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">LOW</div>
+                                <div class="knob-value" data-param="eq-low-1">0</div>
+                            </div>
+                        </div>
+                        <div class="channel-fader" data-channel="1">
+                            <div class="fader-track"></div>
+                            <div class="fader-thumb"></div>
+                        </div>
+                    </div>
+
+                    <!-- Center Controls -->
+                    <div class="mixer-center">
+                        <div class="crossfader-section">
+                            <div class="crossfader">
+                                <div class="fader-track horizontal"></div>
+                                <div class="fader-thumb"></div>
+                            </div>
+                            <div class="fader-label">CROSSFADER</div>
+                        </div>
+
+                        <div class="master-section">
+                            <div class="knob large" data-control="master-level">
+                                <div class="knob-indicator"></div>
+                            </div>
+                            <div class="knob-label-small">MASTER</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Channel EQ -->
+                    <div class="mixer-column mixer-right">
+                        <div class="eq-section">
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-hi-2">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">HI</div>
+                                <div class="knob-value" data-param="eq-hi-2">0</div>
+                            </div>
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-mid-2">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">MID</div>
+                                <div class="knob-value" data-param="eq-mid-2">0</div>
+                            </div>
+                            <div class="eq-knob">
+                                <div class="knob" data-control="eq-low-2">
+                                    <div class="knob-indicator"></div>
+                                </div>
+                                <div class="knob-label-small">LOW</div>
+                                <div class="knob-value" data-param="eq-low-2">0</div>
+                            </div>
+                        </div>
+                        <div class="channel-fader" data-channel="2">
+                            <div class="fader-track"></div>
+                            <div class="fader-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deck 2 (Right) -->
+                <div class="deck deck-right">
+                    <div class="deck-header">
+                        <span class="deck-number">2</span>
+                    </div>
+
+                    <!-- Jog Wheel -->
+                    <div class="jog-wheel">
+                        <div class="jog-wheel-inner"></div>
+                        <div class="jog-wheel-platter"></div>
+                    </div>
+
+                    <!-- Deck Controls -->
+                    <div class="deck-controls">
+                        <button class="deck-btn" data-deck="2" data-control="play">
+                            <span>▶</span>
+                            <span class="btn-label">PLAY/PAUSE</span>
+                        </button>
+                        <button class="deck-btn" data-deck="2" data-control="cue">
+                            <span>CUE</span>
+                        </button>
+                        <button class="deck-btn" data-deck="2" data-control="sync">
+                            <span>SYNC</span>
+                        </button>
+                    </div>
+
+                    <!-- Performance Pads -->
+                    <div class="performance-pads">
+                        <div class="pads-row">
+                            <div class="pad" data-deck="2" data-pad="1" data-note="0">
+                                <span class="pad-number">1</span>
+                                <span class="pad-label">Prev</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="2" data-note="1">
+                                <span class="pad-number">2</span>
+                                <span class="pad-label">Next</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="3" data-note="2">
+                                <span class="pad-number">3</span>
+                                <span class="pad-label">Zoom</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="4" data-note="3">
+                                <span class="pad-number">4</span>
+                                <span class="pad-label">Grid</span>
+                            </div>
+                        </div>
+                        <div class="pads-row">
+                            <div class="pad" data-deck="2" data-pad="5" data-note="4">
+                                <span class="pad-number">5</span>
+                                <span class="pad-label">Pick</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="6" data-note="5">
+                                <span class="pad-number">6</span>
+                                <span class="pad-label">Reject</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="7" data-note="6">
+                                <span class="pad-number">7</span>
+                                <span class="pad-label">Unflag</span>
+                            </div>
+                            <div class="pad" data-deck="2" data-pad="8" data-note="7">
+                                <span class="pad-number">8</span>
+                                <span class="pad-label">View</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tempo Slider -->
+                    <div class="tempo-section">
+                        <div class="tempo-slider" data-deck="2">
+                            <div class="slider-track"></div>
+                            <div class="slider-thumb"></div>
+                        </div>
+                        <div class="tempo-label">TEMPO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parameter Display Panel -->
+            <div class="parameter-panel">
+                <h3>Lightroom Parameters</h3>
+                <div class="parameters-grid" id="parameters-grid">
+                    <div class="param-item">
+                        <span class="param-name">Exposure</span>
+                        <span class="param-value" data-param="Exposure2012">0.00</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Contrast</span>
+                        <span class="param-value" data-param="Contrast2012">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Highlights</span>
+                        <span class="param-value" data-param="Highlights2012">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Shadows</span>
+                        <span class="param-value" data-param="Shadows2012">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Whites</span>
+                        <span class="param-value" data-param="Whites2012">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Blacks</span>
+                        <span class="param-value" data-param="Blacks2012">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Vibrance</span>
+                        <span class="param-value" data-param="Vibrance">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Saturation</span>
+                        <span class="param-value" data-param="Saturation">0</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Temperature</span>
+                        <span class="param-value" data-param="Temperature">5500</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-name">Tint</span>
+                        <span class="param-value" data-param="Tint">0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- MIDI Activity Log -->
+        <aside class="midi-log">
+            <h3>MIDI Activity</h3>
+            <div id="midi-log-content"></div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

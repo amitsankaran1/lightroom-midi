@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { LrClient } from './lightroom/LrClient.js';
-import { MidiHandler } from './midi/MidiHandler.js';
-import { ProfileManager } from './profiles/ProfileManager.js';
+import LrClient from './lightroom/LrClient.js';
+import MidiHandler from './midi/MidiHandler.js';
+import ProfileManager from './profiles/ProfileManager.js';
 
 /**
  * Main Application

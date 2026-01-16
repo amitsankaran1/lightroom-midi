@@ -4,7 +4,7 @@ import easymidi from 'easymidi';
  * MIDI Input Handler
  * Manages MIDI device connections and message processing
  */
-export class MidiHandler {
+class MidiHandler {
   constructor(options = {}) {
     this.deviceName = options.deviceName;
     this.input = null;
@@ -140,3 +140,4 @@ export class MidiHandler {
   }
 }
 
+export default MidiHandler;
