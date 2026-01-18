@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { MidiHandler } from '../src/midi/MidiHandler.js';
+import MidiHandler from '../src/midi/MidiHandler.js';
 
 /**
  * MIDI Learn Tool

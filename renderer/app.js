@@ -39,6 +39,7 @@ async function init() {
 async function loadMidiDevices() {
     try {
         const devices = await window.electronAPI.getMidiDevices();
+        console.log('Loaded MIDI devices:', devices);
         populateDeviceSelect(devices);
     } catch (error) {
         console.error('Failed to load MIDI devices:', error);
@@ -46,6 +47,7 @@ async function loadMidiDevices() {
 }
 
 function populateDeviceSelect(devices) {
+    console.log('Populating device select with:', devices);
     elements.deviceSelect.innerHTML = '<option value="">Select Device...</option>';
     devices.forEach(device => {
         const option = document.createElement('option');
@@ -53,6 +55,7 @@ function populateDeviceSelect(devices) {
         option.textContent = device;
         elements.deviceSelect.appendChild(option);
     });
+    console.log('Device select populated, options count:', elements.deviceSelect.options.length);
 }
 
 // Load profiles
@@ -222,6 +225,7 @@ function setupIPCListeners() {
 
     // Connection status changes
     window.electronAPI.onConnectionStatus((status) => {
+        console.log('Received connection-status event:', status);
         updateStatusIndicators(status);
     });
 
@@ -233,6 +237,7 @@ function setupIPCListeners() {
 
     // MIDI devices updated
     window.electronAPI.onMidiDevices((devices) => {
+        console.log('Received midi-devices event:', devices);
         populateDeviceSelect(devices);
     });
 

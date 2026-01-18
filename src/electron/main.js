@@ -45,9 +45,33 @@ function createWindow() {
 
 async function initializeBackend() {
   try {
-    // Initialize components
-    midiHandler = new MidiHandler();
-    lrClient = new LrClient();
+    // Initialize Lightroom client with connection callback
+    lrClient = new LrClient({
+      onConnectionChange: (connected) => {
+        connectionStatus.lightroom = connected;
+        mainWindow.webContents.send('connection-status', connectionStatus);
+      }
+    });
+
+    // Initialize MIDI handler with message and connection callbacks
+    midiHandler = new MidiHandler({
+      onMessage: (message) => {
+        // Send MIDI message to renderer for visual feedback
+        mainWindow.webContents.send('midi-message', message);
+
+        // Process through ProfileManager
+        if (profileManager) {
+          profileManager.processMidiMessage(message);
+        }
+      },
+      onConnectionChange: (connected, deviceName) => {
+        connectionStatus.midi = connected;
+        connectedDevice = connected ? deviceName : null;
+        mainWindow.webContents.send('connection-status', connectionStatus);
+      }
+    });
+
+    // Initialize profile manager
     profileManager = new ProfileManager(lrClient);
 
     // Load profiles
@@ -58,38 +82,25 @@ async function initializeBackend() {
     const profiles = profileManager.listProfiles();
     mainWindow.webContents.send('profiles-loaded', profiles);
 
-    // List MIDI devices
-    midiDevices = midiHandler.listDevices();
-    mainWindow.webContents.send('midi-devices', midiDevices);
+    // List MIDI devices (static method on class, not instance)
+    midiDevices = MidiHandler.listDevices();
+    console.log('Available MIDI devices:', midiDevices);
+
+    // Send devices to renderer once it's ready
+    if (mainWindow.webContents.isLoading()) {
+      mainWindow.webContents.once('did-finish-load', () => {
+        console.log('Sending MIDI devices to renderer:', midiDevices);
+        mainWindow.webContents.send('midi-devices', midiDevices);
+        mainWindow.webContents.send('profiles-loaded', profiles);
+        mainWindow.webContents.send('connection-status', connectionStatus);
+      });
+    } else {
+      console.log('Sending MIDI devices to renderer:', midiDevices);
+      mainWindow.webContents.send('midi-devices', midiDevices);
+    }
 
     // Connect to Lightroom
     await connectToLightroom();
-
-    // Set up MIDI event handling
-    midiHandler.on('message', (message) => {
-      // Send MIDI message to renderer for visual feedback
-      mainWindow.webContents.send('midi-message', message);
-
-      // Process through ProfileManager
-      if (profileManager.currentProfile) {
-        profileManager.processMidiMessage(message);
-      }
-    });
-
-    // Set up Lightroom parameter change tracking
-    lrClient.on('parameterChanged', (data) => {
-      mainWindow.webContents.send('parameter-changed', data);
-    });
-
-    lrClient.on('connected', () => {
-      connectionStatus.lightroom = true;
-      mainWindow.webContents.send('connection-status', connectionStatus);
-    });
-
-    lrClient.on('disconnected', () => {
-      connectionStatus.lightroom = false;
-      mainWindow.webContents.send('connection-status', connectionStatus);
-    });
 
   } catch (error) {
     console.error('Failed to initialize backend:', error);
@@ -182,8 +193,11 @@ ipcMain.handle('reconnect-lightroom', async () => {
 app.whenReady().then(() => {
   createWindow();
 
-  // Initialize backend after window is created
-  initializeBackend();
+  // Wait for window to finish loading before initializing backend
+  mainWindow.webContents.once('did-finish-load', () => {
+    console.log('Window finished loading, initializing backend...');
+    initializeBackend();
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
