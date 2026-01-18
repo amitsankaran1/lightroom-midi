@@ -2,19 +2,22 @@
   "name": "lr-controller",
   "version": "0.1.0",
   "description": "MIDI controller bridge for Adobe Lightroom",
-  "main": "src/index.js",
+  "main": "src/electron/main.js",
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "midi-learn": "node tools/midi-learn.js",
-    "lr-params": "node tools/lr-parameters.js"
+    "lr-params": "node tools/lr-parameters.js",
+    "electron": "electron .",
+    "electron:dev": "electron . --dev"
   },
   "keywords": [
     "lightroom",
     "midi",
     "controller",
-    "ddj-flx2"
+    "ddj-flx2",
+    "electron"
   ],
   "author": "",
   "license": "MIT",
@@ -22,6 +25,9 @@
     "easymidi": "^3.1.0",
     "ws": "^8.18.0",
     "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "electron": "^28.1.0"
   }
 }
 

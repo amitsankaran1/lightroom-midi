@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
  * Profile Manager
  * Handles loading, switching, and executing profile mappings
  */
-export class ProfileManager {
+class ProfileManager {
   constructor(lrClient) {
     this.lrClient = lrClient;
     this.profiles = new Map();
@@ -101,20 +101,26 @@ export class ProfileManager {
    * Process a MIDI message using current profile
    */
   async processMidiMessage(midiMessage) {
+    console.log('ProfileManager received MIDI:', midiMessage);
+
     if (!this.currentProfile) {
+      console.warn('No current profile loaded');
       return;
     }
 
     // Find matching mapping
     const mapping = this.findMapping(midiMessage);
     if (!mapping) {
+      console.log('No mapping found for MIDI message');
       return;
     }
 
+    console.log('Found mapping, executing action:', mapping.action);
     try {
       await this.executeMapping(mapping, midiMessage);
+      console.log('Action executed successfully');
     } catch (err) {
-      console.error('Error executing mapping:', err.message);
+      console.error('Error executing mapping:', err.message, err);
     }
   }
 
@@ -263,4 +269,6 @@ export class ProfileManager {
     }
   }
 }
+
+export default ProfileManager;
 

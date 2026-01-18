@@ -4,72 +4,72 @@
   "mappings": [
     {
       "comment": "PAD 1 - Star Ratings",
-      "midi": { "type": "noteon", "channel": 0, "note": 0 },
+      "midi": { "type": "noteon", "note": 0 },
       "action": { "type": "rating", "rating": 1 }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 1 },
+      "midi": { "type": "noteon", "note": 1 },
       "action": { "type": "rating", "rating": 2 }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 2 },
+      "midi": { "type": "noteon", "note": 2 },
       "action": { "type": "rating", "rating": 3 }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 3 },
+      "midi": { "type": "noteon", "note": 3 },
       "action": { "type": "rating", "rating": 4 }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 4 },
+      "midi": { "type": "noteon", "note": 4 },
       "action": { "type": "rating", "rating": 5 }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 5 },
+      "midi": { "type": "noteon", "note": 5 },
       "action": { "type": "rating", "rating": 0 }
     },
     {
       "comment": "PAD 6 - Auto Tone",
-      "midi": { "type": "noteon", "channel": 0, "note": 6 },
+      "midi": { "type": "noteon", "note": 6 },
       "action": { "type": "command", "command": "setAutoTone" }
     },
     {
       "comment": "PAD 7 - Black & White Toggle",
-      "midi": { "type": "noteon", "channel": 0, "note": 7 },
+      "midi": { "type": "noteon", "note": 7 },
       "action": { "type": "command", "command": "toggleBlackAndWhite" }
     },
     {
       "comment": "PAD 8 - Reset All",
-      "midi": { "type": "noteon", "channel": 0, "note": 8 },
+      "midi": { "type": "noteon", "note": 8 },
       "action": { "type": "command", "command": "resetAllDevelopAdjustments" }
     },
     {
       "comment": "Color Labels (shifted pads)",
-      "midi": { "type": "noteon", "channel": 0, "note": 16 },
+      "midi": { "type": "noteon", "note": 16 },
       "action": { "type": "colorLabel", "color": "red" }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 17 },
+      "midi": { "type": "noteon", "note": 17 },
       "action": { "type": "colorLabel", "color": "yellow" }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 18 },
+      "midi": { "type": "noteon", "note": 18 },
       "action": { "type": "colorLabel", "color": "green" }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 19 },
+      "midi": { "type": "noteon", "note": 19 },
       "action": { "type": "colorLabel", "color": "blue" }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 20 },
+      "midi": { "type": "noteon", "note": 20 },
       "action": { "type": "colorLabel", "color": "purple" }
     },
     {
-      "midi": { "type": "noteon", "channel": 0, "note": 21 },
+      "midi": { "type": "noteon", "note": 21 },
       "action": { "type": "colorLabel", "color": "none" }
     },
     {
       "comment": "CC 1 - Exposure (typical knob/fader)",
-      "midi": { "type": "cc", "channel": 0, "controller": 1 },
+      "midi": { "type": "cc", "controller": 1 },
       "action": { 
         "type": "setValue", 
         "parameter": "Exposure2012",
@@ -84,7 +84,7 @@
     },
     {
       "comment": "CC 2 - Contrast",
-      "midi": { "type": "cc", "channel": 0, "controller": 2 },
+      "midi": { "type": "cc", "controller": 2 },
       "action": { 
         "type": "setValue", 
         "parameter": "Contrast2012",
@@ -99,7 +99,7 @@
     },
     {
       "comment": "CC 3 - Highlights",
-      "midi": { "type": "cc", "channel": 0, "controller": 3 },
+      "midi": { "type": "cc", "controller": 3 },
       "action": { 
         "type": "setValue", 
         "parameter": "Highlights2012",
@@ -114,7 +114,7 @@
     },
     {
       "comment": "CC 4 - Shadows",
-      "midi": { "type": "cc", "channel": 0, "controller": 4 },
+      "midi": { "type": "cc", "controller": 4 },
       "action": { 
         "type": "setValue", 
         "parameter": "Shadows2012",
@@ -129,7 +129,7 @@
     },
     {
       "comment": "CC 5 - Whites",
-      "midi": { "type": "cc", "channel": 0, "controller": 5 },
+      "midi": { "type": "cc", "controller": 5 },
       "action": { 
         "type": "setValue", 
         "parameter": "Whites2012",
@@ -144,7 +144,7 @@
     },
     {
       "comment": "CC 6 - Blacks",
-      "midi": { "type": "cc", "channel": 0, "controller": 6 },
+      "midi": { "type": "cc", "controller": 6 },
       "action": { 
         "type": "setValue", 
         "parameter": "Blacks2012",
@@ -159,7 +159,7 @@
     },
     {
       "comment": "CC 7 - Vibrance",
-      "midi": { "type": "cc", "channel": 0, "controller": 7 },
+      "midi": { "type": "cc", "controller": 7 },
       "action": { 
         "type": "setValue", 
         "parameter": "Vibrance",
@@ -174,7 +174,7 @@
     },
     {
       "comment": "CC 8 - Saturation",
-      "midi": { "type": "cc", "channel": 0, "controller": 8 },
+      "midi": { "type": "cc", "controller": 8 },
       "action": { 
         "type": "setValue", 
         "parameter": "Saturation",
@@ -189,7 +189,7 @@
     },
     {
       "comment": "CC 9 - Temperature",
-      "midi": { "type": "cc", "channel": 0, "controller": 9 },
+      "midi": { "type": "cc", "controller": 9 },
       "action": { 
         "type": "setValue", 
         "parameter": "Temperature",
@@ -204,7 +204,7 @@
     },
     {
       "comment": "CC 10 - Tint",
-      "midi": { "type": "cc", "channel": 0, "controller": 10 },
+      "midi": { "type": "cc", "controller": 10 },
       "action": { 
         "type": "setValue", 
         "parameter": "Tint",

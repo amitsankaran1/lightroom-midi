@@ -4,7 +4,7 @@
   "mappings": [
     {
       "comment": "HSL - Red Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 1 },
+      "midi": { "type": "cc", "controller": 1 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentRed",
@@ -19,7 +19,7 @@
     },
     {
       "comment": "HSL - Orange Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 2 },
+      "midi": { "type": "cc", "controller": 2 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentOrange",
@@ -34,7 +34,7 @@
     },
     {
       "comment": "HSL - Yellow Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 3 },
+      "midi": { "type": "cc", "controller": 3 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentYellow",
@@ -49,7 +49,7 @@
     },
     {
       "comment": "HSL - Green Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 4 },
+      "midi": { "type": "cc", "controller": 4 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentGreen",
@@ -64,7 +64,7 @@
     },
     {
       "comment": "HSL - Aqua Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 5 },
+      "midi": { "type": "cc", "controller": 5 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentAqua",
@@ -79,7 +79,7 @@
     },
     {
       "comment": "HSL - Blue Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 6 },
+      "midi": { "type": "cc", "controller": 6 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentBlue",
@@ -94,7 +94,7 @@
     },
     {
       "comment": "HSL - Purple Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 7 },
+      "midi": { "type": "cc", "controller": 7 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentPurple",
@@ -109,7 +109,7 @@
     },
     {
       "comment": "HSL - Magenta Hue",
-      "midi": { "type": "cc", "channel": 0, "controller": 8 },
+      "midi": { "type": "cc", "controller": 8 },
       "action": { 
         "type": "setValue", 
         "parameter": "HueAdjustmentMagenta",
@@ -124,7 +124,7 @@
     },
     {
       "comment": "Clarity",
-      "midi": { "type": "cc", "channel": 0, "controller": 9 },
+      "midi": { "type": "cc", "controller": 9 },
       "action": { 
         "type": "setValue", 
         "parameter": "Clarity2012",
@@ -139,7 +139,7 @@
     },
     {
       "comment": "Dehaze",
-      "midi": { "type": "cc", "channel": 0, "controller": 10 },
+      "midi": { "type": "cc", "controller": 10 },
       "action": { 
         "type": "setValue", 
         "parameter": "Dehaze",
@@ -154,7 +154,7 @@
     },
     {
       "comment": "Switch back to Edit Profile",
-      "midi": { "type": "noteon", "channel": 0, "note": 15 },
+      "midi": { "type": "noteon", "note": 15 },
       "action": { "type": "switchProfile", "profile": "ddj-flx2-edit" }
     }
   ]
